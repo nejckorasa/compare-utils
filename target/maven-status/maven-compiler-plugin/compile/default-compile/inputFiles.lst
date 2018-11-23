@@ -1,0 +1,10 @@
+/Users/nejckorasa/IdeaProjects/cmp-utils/src/main/java/com/nkorasa/cmp/CollectionCmp.java
+/Users/nejckorasa/IdeaProjects/cmp-utils/src/main/java/com/nkorasa/cmp/result/Diff.java
+/Users/nejckorasa/IdeaProjects/cmp-utils/src/main/java/com/nkorasa/cmp/CollectionCmpBuilder.java
+/Users/nejckorasa/IdeaProjects/cmp-utils/src/main/java/com/nkorasa/cmp/ObjectCmp.java
+/Users/nejckorasa/IdeaProjects/cmp-utils/src/main/java/com/nkorasa/cmp/result/CmpResult.java
+/Users/nejckorasa/IdeaProjects/cmp-utils/src/main/java/com/nkorasa/cmp/CollectionCmpPartitioner.java
+/Users/nejckorasa/IdeaProjects/cmp-utils/src/main/java/com/nkorasa/cmp/result/CmpPair.java
+/Users/nejckorasa/IdeaProjects/cmp-utils/src/main/java/com/nkorasa/cmp/CollectionCmpSameBuilder.java
+/Users/nejckorasa/IdeaProjects/cmp-utils/src/main/java/com/nkorasa/cmp/EqualsUtils.java
+/Users/nejckorasa/IdeaProjects/cmp-utils/src/main/java/com/nkorasa/cmp/exceptions/KeyCollisionException.java
