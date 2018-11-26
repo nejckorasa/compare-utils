@@ -31,10 +31,11 @@ public final class CollectionCmpPartitioner
   public static <O> Map<Serializable, O> buildPartition(final Collection<O> collection, final Function<O, Serializable> keyExtractor)
   {
     final AtomicBoolean collision = new AtomicBoolean(false);
-    final AtomicReference<Serializable> collisionKey = null;
+    final AtomicReference<Serializable> collisionKey = new AtomicReference<>(null);
 
     final Map<Serializable, O> partition = new HashMap<>();
     collection.forEach(item -> partition.compute(keyExtractor.apply(item), (k, v) -> {
+      //noinspection VariableNotUsedInsideIf
       if (v != null)
       {
         collision.set(true);

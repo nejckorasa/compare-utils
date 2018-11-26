@@ -30,7 +30,7 @@ public class CollectionCmpSameBuilder<O>
   @SafeVarargs
   public final CollectionCmpSameBuilder<O> withEquals(final Function<O, ?>... equalFields)
   {
-    this.equalsFunction = EqualsUtils.buildEqualsFunction(equalFields);
+    equalsFunction = EqualsUtils.buildEqualsFunction(equalFields);
     return this;
   }
 

@@ -16,8 +16,6 @@ import com.nkorasa.cmp.result.CmpResult;
 @SuppressWarnings({"unused", "OverloadedVarargsMethod"})
 public final class CollectionCmp<B, W>
 {
-  // TODO -> intersect only warning?
-
   private final Collection<B> baseList;
   private final Collection<W> workingList;
 

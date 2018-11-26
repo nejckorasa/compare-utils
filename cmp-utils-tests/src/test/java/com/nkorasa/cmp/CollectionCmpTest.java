@@ -1,11 +1,8 @@
 package com.nkorasa.cmp;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 
-import com.nkorasa.cmp.result.CmpPair;
 import com.nkorasa.cmp.result.CmpResult;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +10,6 @@ import static org.junit.Assert.assertEquals;
 
 public class CollectionCmpTest
 {
-
   @Test
   public void compareSameDefaultEqualsNoDifference()
   {
