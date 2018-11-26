@@ -6,7 +6,7 @@ Comparing of Java objects and collections of objects made easy!
 
 It provides easy way to compare collections of objects of different type as well as compare just objects alone.
 
-## TODO
+## Todo [stay tuned]
 
 - Write actual readme with examples and use cases
 - publish to maven central
