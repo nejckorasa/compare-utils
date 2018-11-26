@@ -1,4 +1,4 @@
-# cmp-utils
+# Cmp Utils
 
 [![Build Status](https://travis-ci.com/nejckorasa/cmp-utils.svg?token=pfWZRfNyzeRf4kWWpnbs&branch=master)](https://travis-ci.com/nejckorasa/cmp-utils)
 
