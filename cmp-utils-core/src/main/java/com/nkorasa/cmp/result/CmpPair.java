@@ -2,6 +2,19 @@ package com.nkorasa.cmp.result;
 
 import java.io.Serializable;
 
+/**
+ * Compare pair that represents compare result between {@link #base} object from base collection and {@link #working} object
+ * from working collection that are matched by the same key
+ *
+ * Key is provided with {@link #key}
+ * Difference type is provided with {@link #diff}
+ *
+ * If exists only in one collection and does not exist in another, it's value will be {@code null}. For example, all added items will be
+ * {@code null} in base collection, therefore {@link #base} will be {@code null}
+ *
+ * @param <B> base object generic type
+ * @param <W> working object generic type
+ */
 public class CmpPair<B, W>
 {
   private final Serializable key;
@@ -37,26 +50,41 @@ public class CmpPair<B, W>
     return new CmpPair<>(key, null, working, Diff.ADDED);
   }
 
+  /**
+   * @return key that matched base and working objects
+   */
   public Serializable getKey()
   {
     return key;
   }
 
+  /**
+   * @return base object or {@code null} if object does not exist in base collection
+   */
   public B getBase()
   {
     return base;
   }
 
+  /**
+   * @return base object or {@code null} if object does not exist in working collection
+   */
   public W getWorking()
   {
     return working;
   }
 
+  /**
+   * @return latest nonnull object - working is considered latest
+   */
   public Object getLatest()
   {
     return working == null ? base : working;
   }
 
+  /**
+   * @return difference type between matched base and working objects
+   */
   public Diff getDiff()
   {
     return diff;

@@ -7,12 +7,21 @@ import java.util.function.Function;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
+/**
+ * Utils class to build equals function and hold defaults
+ */
 final class EqualsUtils
 {
   static final BiFunction<Object, Object, Boolean> DEFAULT_EQUALS_FUNCTION = Objects::equals;
 
   private EqualsUtils() { }
 
+  /**
+   * Builds equals function from equalFields
+   * @param equalFields fields to compare
+   * @param <O> objects generic type
+   * @return equals function
+   */
   static <O> BiFunction<O, O, Boolean> buildEqualsFunction(final Function<O, ?>[] equalFields)
   {
     if (equalFields == null || equalFields.length == 0)

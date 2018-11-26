@@ -10,10 +10,20 @@ import java.util.function.Function;
 
 import com.nkorasa.cmp.exceptions.KeyCollisionException;
 
+/**
+ * Utils class used to partition collection based on key extractor
+ */
 public final class CollectionCmpPartitioner
 {
   private CollectionCmpPartitioner() { }
 
+  /**
+   * Checks if collection can be partitioned using key extracted using provided keyExtractor
+   * @param collection collection to partition
+   * @param keyExtractor key extractor used to extract keys from items in collection
+   * @param <O> objects generic type
+   * @return true if collection can be partitioned
+   */
   public static <O> boolean canPartition(final Collection<O> collection, final Function<O, Serializable> keyExtractor)
   {
     try
@@ -28,6 +38,17 @@ public final class CollectionCmpPartitioner
     return true;
   }
 
+  /**
+   * Builds partition of collection using keyExtractor
+   *
+   * Use {@link #canPartition(Collection, Function)} to check if collection can be partitioned
+   *
+   * @throws KeyCollisionException if collection cannot be partitioned.
+   * @param collection collection to partition
+   * @param keyExtractor key extractor used to extract keys from items in collection
+   * @param <O> objects generic type
+   * @return map with collection items as values and it's keys as keys
+   */
   public static <O> Map<Serializable, O> buildPartition(final Collection<O> collection, final Function<O, Serializable> keyExtractor)
   {
     final AtomicBoolean collision = new AtomicBoolean(false);
