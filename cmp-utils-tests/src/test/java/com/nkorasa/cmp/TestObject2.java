@@ -7,7 +7,7 @@ class TestObject2
   private String strField;
   private Long longField;
 
-  public TestObject2(final String strField, final Long longField)
+  TestObject2(final String strField, final Long longField)
   {
     this.strField = strField;
     this.longField = longField;

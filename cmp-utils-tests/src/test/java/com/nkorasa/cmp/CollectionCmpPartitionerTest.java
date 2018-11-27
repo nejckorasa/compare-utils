@@ -5,16 +5,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @SuppressWarnings("NonBooleanMethodNameMayNotStartWithQuestion")
-class CollectionCmpPartitionerTest
+public class CollectionCmpPartitionerTest
 {
-
   @Test
   public void partitionSuccessful()
   {

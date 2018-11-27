@@ -5,12 +5,12 @@ import java.util.List;
 
 import com.nkorasa.cmp.result.CmpResult;
 import com.nkorasa.cmp.result.Diff;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-class CollectionCmpTest
+public class CollectionCmpTest
 {
   @Test
   public void compareSameDefaultEqualsNoDifference()
