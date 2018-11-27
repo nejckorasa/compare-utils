@@ -44,6 +44,25 @@ public class CollectionCmpBuilder<B, W>
   }
 
   /**
+   * Use different (simpler) objects to compare items matched by the same key.
+   *
+   * Default equals function {@link #equalsFunction} is used to define equality of extracted objects.
+   *
+   * Example would be to use String representations of items as equal objects.
+   *
+   * @param baseObjectExtractor function to extract an equal object from base items
+   * @param workingObjectExtractor function to extract an equal object from working items
+   * @return builder instance
+   */
+  public CollectionCmpBuilder<B, W> withEqualObject(
+      final Function<B, Object> baseObjectExtractor,
+      final Function<W, Object> workingObjectExtractor)
+  {
+    equalsFunction = (b, w) -> baseObjectExtractor.apply(b).equals(workingObjectExtractor.apply(w));
+    return this;
+  }
+
+  /**
    * Calls {@link CollectionCmp#compare(Function, Function, BiFunction)} with provided key extractors.
    * @see CollectionCmp#compare(Function, Function, BiFunction)
    * @param baseKeyExtractor key extractor used to extract keys from items inside {@link #baseList}

@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 /**
  * Compare pair that represents compare result between {@link #base} object from base collection and {@link #working} object
- * from working collection that are matched by the same key
+ * from working collection that are matched by the same key.
  *
- * Key is provided with {@link #key}
- * Difference type is provided with {@link #diff}
+ * Key is provided with {@link #key}.
+ * Difference type is provided with {@link #diff}.
  *
  * If exists only in one collection and does not exist in another, it's value will be {@code null}. For example, all added items will be
- * {@code null} in base collection, therefore {@link #base} will be {@code null}
+ * {@code null} in base collection, therefore {@link #base} will be {@code null}.
  *
  * @param <B> base object generic type
  * @param <W> working object generic type

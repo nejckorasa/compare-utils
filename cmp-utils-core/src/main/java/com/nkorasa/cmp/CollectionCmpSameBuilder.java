@@ -43,12 +43,28 @@ public class CollectionCmpSameBuilder<O>
   }
 
   /**
-   * Add objects fields based on which objects are confirmed. All other fields are ignored. Default equals function is {@link #equalsFunction}.
-   * @param equalFields objects fields based on which objects are confirmed
+   * Use different (simpler) objects to compare items matched by the same key.
+   *
+   * Default equals function {@link #equalsFunction} is used to define equality of extracted objects.
+   *
+   * Example would be to use String representations of items as equal objects.
+   *
+   * @param objectExtractor function to extract an equal object from item
+   * @return builder instance
+   */
+  public CollectionCmpSameBuilder<O> withEqualObject(final Function<O, Object> objectExtractor)
+  {
+    equalsFunction = (b, w) -> objectExtractor.apply(b).equals(objectExtractor.apply(w));
+    return this;
+  }
+
+  /**
+   * Add objects fields based on which objects are compared. All other fields are ignored. Default equals function is {@link #equalsFunction}.
+   * @param equalFields objects fields based on which objects are compared
    * @return builder instance
    */
   @SafeVarargs
-  public final CollectionCmpSameBuilder<O> withEquals(final Function<O, ?>... equalFields)
+  public final CollectionCmpSameBuilder<O> withEqualFields(final Function<O, ?>... equalFields)
   {
     equalsFunction = EqualsUtils.buildEqualsFunction(equalFields);
     return this;

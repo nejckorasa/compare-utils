@@ -65,6 +65,10 @@ public final class CollectionCmp<B, W>
    * baseKeyExtractor and workingKeyExtractor. Items matched together by the same key are later compared
    * using equalsFunction.
    *
+   * Make sure that collections {@link #baseList} and {@link #workingList} can be partitioned
+   * using {@link CollectionCmpPartitioner#canPartition(Collection, Function)}. If keys collide and partitioning is not successful,
+   * compare result will not always be correct.
+   *
    * The end result contains all changes found between collections - added, updated, removed, same and different items.
    * See {@link com.nkorasa.cmp.result.Diff} and {@link CmpResult}.
    *
