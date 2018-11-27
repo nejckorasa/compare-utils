@@ -29,10 +29,10 @@ public final class CollectionCmpPartitioner
   /**
    * Builds partition of collection using keyExtractor.
    *
-   * Partitioning is successful if all keys extracted from items in collection are unique and nonnull. If more than one item
+   * <p>Partitioning is successful if all keys extracted from items in collection are unique and nonnull. If more than one item
    * has the same key, only the first item will exist in result partition.
    *
-   * Use {@link #canPartition(Collection, Function)} to check if collection can be partitioned.
+   * <p>Use {@link #canPartition(Collection, Function)} to check if collection can be partitioned.
    *
    * @param collection collection to partition
    * @param keyExtractor key extractor used to extract keys from items in collection

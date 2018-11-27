@@ -20,13 +20,13 @@ public class ObjectCmpTest
   }
 
   @Test
-  public void sameObjectsEqualFieldsEquals()
+  public void sameObjectsEqualitiesEquals()
   {
     assertTrue(ObjectCmp.equals(new TestObject("1", 1), new TestObject("1", 2), TestObject::getStrField));
   }
 
   @Test
-  public void sameObjectsEqualFieldsNotEquals()
+  public void sameObjectsEqualitiesNotEquals()
   {
     assertFalse(ObjectCmp.equals(new TestObject("1", 1), new TestObject("1", 2), TestObject::getIntField));
   }
@@ -41,5 +41,25 @@ public class ObjectCmpTest
   public void differentObjectsEqualFunctionNotEquals()
   {
     assertFalse(ObjectCmp.equals(new TestObject("1", 1), new TestObject2("1", 2L), (o1, o2) -> o1.getIntField().equals(o2.getLongField().intValue())));
+  }
+
+  @Test
+  public void differentObjectsEqualityPairsEquals()
+  {
+    assertTrue(ObjectCmp.equals(
+        new TestObject("1", 1),
+        new TestObject2("1", 1L),
+        EqualityPair.of(TestObject::getStrField, TestObject2::getStrField),
+        EqualityPair.of(TestObject::getIntField, o2 -> o2.getLongField().intValue())));
+  }
+
+  @Test
+  public void differentObjectsEqualityPairsNotEquals()
+  {
+    assertFalse(ObjectCmp.equals(
+        new TestObject("1", 1),
+        new TestObject2("1", 10L),
+        EqualityPair.of(TestObject::getStrField, TestObject2::getStrField),
+        EqualityPair.of(TestObject::getIntField, o2 -> o2.getLongField().intValue())));
   }
 }

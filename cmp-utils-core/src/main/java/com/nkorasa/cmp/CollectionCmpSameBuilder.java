@@ -25,7 +25,7 @@ public class CollectionCmpSameBuilder<O>
    * @param baseList base collection to compare
    * @param workingList working collection to compare
    */
-  public CollectionCmpSameBuilder(final Collection<O> baseList, final Collection<O> workingList)
+  CollectionCmpSameBuilder(final Collection<O> baseList, final Collection<O> workingList)
   {
     this.baseList = baseList;
     this.workingList = workingList;
@@ -43,30 +43,20 @@ public class CollectionCmpSameBuilder<O>
   }
 
   /**
-   * Use different (simpler) objects to compare items matched by the same key.
+   * Compare matched items based on equalities. All equalities must match in order for items to be considered equal.
    *
-   * Default equals function {@link #equalsFunction} is used to define equality of extracted objects.
+   * <p>Equality is a function that takes item as an input parameter and returns a value.
+   * Two items are considered equal if the results of all it's equalities are equal.
    *
-   * Example would be to use String representations of items as equal objects.
+   * <p>You can use this option to compare items of same type based on a few of their fields.
    *
-   * @param objectExtractor function to extract an equal object from item
-   * @return builder instance
-   */
-  public CollectionCmpSameBuilder<O> withEqualObject(final Function<O, Object> objectExtractor)
-  {
-    equalsFunction = (b, w) -> objectExtractor.apply(b).equals(objectExtractor.apply(w));
-    return this;
-  }
-
-  /**
-   * Add objects fields based on which objects are compared. All other fields are ignored. Default equals function is {@link #equalsFunction}.
-   * @param equalFields objects fields based on which objects are compared
+   * @param equalities equalities based on which objects are compared
    * @return builder instance
    */
   @SafeVarargs
-  public final CollectionCmpSameBuilder<O> withEqualFields(final Function<O, ?>... equalFields)
+  public final CollectionCmpSameBuilder<O> withEqualities(final Function<O, ?>... equalities)
   {
-    equalsFunction = EqualsUtils.buildEqualsFunction(equalFields);
+    equalsFunction = EqualsUtils.buildEqualsFunction(equalities);
     return this;
   }
 

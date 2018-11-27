@@ -26,7 +26,7 @@ public class CollectionCmpBuilder<B, W>
    * @param baseList base collection to compare
    * @param workingList working collection to compare
    */
-  public CollectionCmpBuilder(final Collection<B> baseList, final Collection<W> workingList)
+  CollectionCmpBuilder(final Collection<B> baseList, final Collection<W> workingList)
   {
     this.baseList = baseList;
     this.workingList = workingList;
@@ -44,21 +44,21 @@ public class CollectionCmpBuilder<B, W>
   }
 
   /**
-   * Use different (simpler) objects to compare items matched by the same key.
+   * Compare matched items based on equality pairs. All equality pairs must match in order for items to be considered equal.
    *
-   * Default equals function {@link #equalsFunction} is used to define equality of extracted objects.
+   * <p>Equality is a function that takes item as an input parameter and returns a value.
+   * Two items are considered equal if the results of all it's equality pairs are equal.
    *
-   * Example would be to use String representations of items as equal objects.
+   * <p>You can use this option to compare items of same type based on a few of their fields.
    *
-   * @param baseObjectExtractor function to extract an equal object from base items
-   * @param workingObjectExtractor function to extract an equal object from working items
+   * @see EqualityPair
+   * @param equalityPairs equality pairs based on which objects are compared
    * @return builder instance
    */
-  public CollectionCmpBuilder<B, W> withEqualObject(
-      final Function<B, Object> baseObjectExtractor,
-      final Function<W, Object> workingObjectExtractor)
+  @SafeVarargs
+  public final CollectionCmpBuilder<B, W> withEqualities(final EqualityPair<B, W>... equalityPairs)
   {
-    equalsFunction = (b, w) -> baseObjectExtractor.apply(b).equals(workingObjectExtractor.apply(w));
+    equalsFunction = EqualsUtils.buildEqualsFunction(equalityPairs);
     return this;
   }
 

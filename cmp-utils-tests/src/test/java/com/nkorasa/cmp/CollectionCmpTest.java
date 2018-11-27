@@ -35,7 +35,7 @@ public class CollectionCmpTest
   }
 
   @Test
-  public void compareSameCustomEqualFieldsNoDifference()
+  public void compareSameEqualitiesNoDifference()
   {
     final List<TestObject> baseList = Arrays.asList(
         new TestObject("1", 9),
@@ -51,14 +51,14 @@ public class CollectionCmpTest
 
     final CmpResult<TestObject, TestObject> compareResult = CollectionCmp
         .ofSame(baseList, workingList)
-        .withEqualFields(TestObject::getStrField)
+        .withEqualities(TestObject::getStrField)
         .compare(TestObject::getStrField);
 
     assertEquals(0, compareResult.getChangesCount());
   }
 
   @Test
-  public void compareSameCustomEqualObjectNoDifference()
+  public void compareSameMultipleEqualitiesNoDifference()
   {
     final List<TestObject> baseList = Arrays.asList(
         new TestObject("1", 9),
@@ -74,14 +74,14 @@ public class CollectionCmpTest
 
     final CmpResult<TestObject, TestObject> compareResult = CollectionCmp
         .ofSame(baseList, workingList)
-        .withEqualObject(t -> t.getStrField() + "-" + t.getIntField())
+        .withEqualities(TestObject::getStrField, TestObject::getIntField)
         .compare(TestObject::getStrField);
 
     assertEquals(0, compareResult.getChangesCount());
   }
 
   @Test
-  public void compareSameCustomEqualFieldsDifferenceAndUpdates()
+  public void compareSameEqualitiesDifferenceAndUpdates()
   {
     final List<TestObject> baseList = Arrays.asList(
         new TestObject("1", 1),
@@ -97,7 +97,7 @@ public class CollectionCmpTest
 
     final CmpResult<TestObject, TestObject> compareResult = CollectionCmp
         .ofSame(baseList, workingList)
-        .withEqualFields(TestObject::getStrField, TestObject::getIntField)
+        .withEqualities(TestObject::getStrField, TestObject::getIntField)
         .compare(TestObject::getStrField);
 
     assertEquals(3, compareResult.getChangesCount());
@@ -161,7 +161,7 @@ public class CollectionCmpTest
   }
 
   @Test
-  public void compareDifferentWithEqualObjectDifference()
+  public void compareDifferentMultipleEqualitiesDifference()
   {
     final List<TestObject> baseList = Arrays.asList(
         new TestObject("1", 1),
@@ -177,7 +177,10 @@ public class CollectionCmpTest
 
     final CmpResult<TestObject, TestObject2> compareResult = CollectionCmp
         .of(baseList, workingList)
-        .withEqualObject(TestObject::getIntField, o2 -> o2.getLongField().intValue())
+        .withEqualities(
+            EqualityPair.of(TestObject::getIntField, o2 -> o2.getLongField().intValue()),
+            EqualityPair.of(TestObject::getStrField, TestObject2::getStrField)
+        )
         .compare(TestObject::getStrField, TestObject2::getStrField);
 
     assertEquals(3, compareResult.getChangesCount());
