@@ -15,9 +15,11 @@ public final class CollectionCmpPartitioner
 
   /**
    * Checks if collection can be partitioned using key extracted using provided keyExtractor
+   *
    * @param collection collection to partition
    * @param keyExtractor key extractor used to extract keys from items in collection
    * @param <O> objects generic type
+   *
    * @return true if collection can be partitioned
    */
   public static <O> boolean canPartition(final Collection<O> collection, final Function<O, Serializable> keyExtractor)
@@ -28,18 +30,19 @@ public final class CollectionCmpPartitioner
 
   /**
    * Builds partition of collection using keyExtractor.
-   *
-   * <p>Partitioning is successful if all keys extracted from items in collection are unique and nonnull. If more than one item
-   * has the same key, only the first item will exist in result partition.
-   *
+   * <p>Partitioning is successful if all keys extracted from items in collection are unique and nonnull. If more than one
+   * item has the same key, only the first item will exist in result partition.
    * <p>Use {@link #canPartition(Collection, Function)} to check if collection can be partitioned.
    *
    * @param collection collection to partition
    * @param keyExtractor key extractor used to extract keys from items in collection
    * @param <O> objects generic type
+   *
    * @return map with collection items as values and it's keys as keys
    */
-  public static <O> Map<Serializable, O> buildPartition(final Collection<O> collection, final Function<O, Serializable> keyExtractor)
+  public static <O> Map<Serializable, O> buildPartition(
+      final Collection<O> collection,
+      final Function<O, Serializable> keyExtractor)
   {
     final Map<Serializable, O> partition = new HashMap<>();
     collection.forEach(item -> partition.computeIfAbsent(keyExtractor.apply(item), k -> item));

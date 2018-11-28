@@ -5,11 +5,10 @@ import java.io.Serializable;
 /**
  * Compare pair that represents compare result between {@link #base} object from base collection and {@link #working} object
  * from working collection that are matched by the same key.
- *
  * <p>Key is provided with {@link #key}.
  * Difference type is provided with {@link #diff}.
- *
- * <p>If exists only in one collection and does not exist in another, it's value will be {@code null}. For example, all added items will be
+ * <p>If exists only in one collection and does not exist in another, it's value will be {@code null}. For example, all added
+ * items will be
  * {@code null} in base collection, therefore {@link #base} will be {@code null}.
  *
  * @param <B> base object generic type
@@ -40,6 +39,7 @@ public class CmpPair<B, W>
   {
     return new CmpPair<>(key, base, working, Diff.UPDATED);
   }
+
   public static <B, W> CmpPair<B, W> unchanged(final Serializable key, final B base)
   {
     return new CmpPair<>(key, base, null, Diff.UNCHANGED);

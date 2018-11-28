@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 
 /**
  * Collections compare result containing all change information
+ *
  * @param <B> base objects generic type
  * @param <W> working objects generic type
  */
@@ -46,6 +47,7 @@ public class CmpResult<B, W>
 
   /**
    * Gets all compare pairs, changed and unchanged
+   *
    * @return list of compare pairs
    */
   public List<CmpPair<B, W>> getAll()
@@ -55,6 +57,7 @@ public class CmpResult<B, W>
 
   /**
    * Gets all compare pairs of items removed from base collection
+   *
    * @return list of compare pairs
    */
   public List<CmpPair<B, W>> getRemoved()
@@ -64,6 +67,7 @@ public class CmpResult<B, W>
 
   /**
    * Gets all compare pairs of items added to working collection
+   *
    * @return list of compare pairs
    */
   public List<CmpPair<B, W>> getAdded()
@@ -73,7 +77,6 @@ public class CmpResult<B, W>
 
   /**
    * Gets all compare pairs of items that exist in both collections but were updated.
-   *
    * Updated means changed based on equals function.
    *
    * @return list of compare pairs
@@ -85,6 +88,7 @@ public class CmpResult<B, W>
 
   /**
    * Gets all compare pairs of unchanged items
+   *
    * @return list of compare pairs
    */
   public List<CmpPair<B, W>> getUnchanged()
@@ -94,6 +98,7 @@ public class CmpResult<B, W>
 
   /**
    * Gets all compare pairs of changed items
+   *
    * @return list of compare pairs
    */
   public List<CmpPair<B, W>> getChanged()
@@ -103,6 +108,7 @@ public class CmpResult<B, W>
 
   /**
    * Gets all compare pairs different items - items removed from base collection or added to working collection
+   *
    * @return list of compare pairs
    */
   public List<CmpPair<B, W>> getDifferent()
@@ -110,9 +116,9 @@ public class CmpResult<B, W>
     return streamDifferent().collect(Collectors.toList());
   }
 
-
   /**
    * Gets all items added to working collection
+   *
    * @return list of added items
    */
   public List<W> getAddedItems()
@@ -122,6 +128,7 @@ public class CmpResult<B, W>
 
   /**
    * Gets all items removed from base collection
+   *
    * @return list of removed items
    */
   public List<B> getRemovedItems()
@@ -131,6 +138,7 @@ public class CmpResult<B, W>
 
   /**
    * Gets all items removed from base collection or added to working collection
+   *
    * @return list different items
    */
   public List<Object> getDifferentItems()
@@ -139,8 +147,8 @@ public class CmpResult<B, W>
   }
 
   /**
-   * Gets number of changes.
-   * Sum of removed, added, updated items.
+   * Gets number of changes. Sum of removed, added, updated items.
+   *
    * @return changes count
    */
   public int getChangesCount()
@@ -159,8 +167,9 @@ public class CmpResult<B, W>
   /**
    * Gets number of different items = items removed from base collection or added to working collection.
    *
-   * @see #getDifferent()
    * @return number of different items
+   *
+   * @see #getDifferent()
    */
   public int getDifferentCount()
   {
@@ -168,8 +177,9 @@ public class CmpResult<B, W>
   }
 
   /**
-   * @see #getDifferent()
    * @return true if differences exist
+   *
+   * @see #getDifferent()
    */
   public boolean hasDifferences()
   {
@@ -178,6 +188,7 @@ public class CmpResult<B, W>
 
   /**
    * Performs action on each compare pair
+   *
    * @param action action to perform
    */
   public void forEach(final Consumer<CmpPair<B, W>> action)
@@ -190,6 +201,7 @@ public class CmpResult<B, W>
 
   /**
    * Performs action on each changed compare pair
+   *
    * @param action action to perform
    */
   public void forEachChanged(final Consumer<CmpPair<B, W>> action)
@@ -201,6 +213,7 @@ public class CmpResult<B, W>
 
   /**
    * Performs action on each unchanged compare pair
+   *
    * @param action action to perform
    */
   public void forEachUnchanged(final Consumer<CmpPair<B, W>> action)
@@ -210,6 +223,7 @@ public class CmpResult<B, W>
 
   /**
    * Streams all compare pairs
+   *
    * @return stream
    */
   public Stream<CmpPair<B, W>> stream()
@@ -219,6 +233,7 @@ public class CmpResult<B, W>
 
   /**
    * Streams all changed compare pairs
+   *
    * @return stream
    */
   public Stream<CmpPair<B, W>> streamChanged()
@@ -228,6 +243,7 @@ public class CmpResult<B, W>
 
   /**
    * Streams all unchanged compare pairs
+   *
    * @return stream
    */
   public Stream<CmpPair<B, W>> streamUnchanged()
@@ -237,8 +253,10 @@ public class CmpResult<B, W>
 
   /**
    * Streams all different compare pairs
-   * @see #getDifferent()
+   *
    * @return stream
+   *
+   * @see #getDifferent()
    */
   public Stream<CmpPair<B, W>> streamDifferent()
   {

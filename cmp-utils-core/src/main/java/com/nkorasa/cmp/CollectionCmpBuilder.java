@@ -2,6 +2,8 @@ package com.nkorasa.cmp;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -9,9 +11,11 @@ import com.nkorasa.cmp.result.CmpResult;
 
 /**
  * Builder used to configure comparing of collections of different objects performed in {@link CollectionCmp}
- * @see CollectionCmpSameBuilder to compare objects with same types
+ *
  * @param <B> base objects generic type
  * @param <W> working objects generic type
+ *
+ * @see CollectionCmpSameBuilder to compare objects with same types
  */
 @SuppressWarnings("AssignmentOrReturnOfFieldWithMutableType")
 public class CollectionCmpBuilder<B, W>
@@ -23,6 +27,7 @@ public class CollectionCmpBuilder<B, W>
 
   /**
    * Initialize builder base and working collections.
+   *
    * @param baseList base collection to compare
    * @param workingList working collection to compare
    */
@@ -34,8 +39,12 @@ public class CollectionCmpBuilder<B, W>
 
   /**
    * Add equals function to compare items matched by same key. Default equals function is {@link #equalsFunction}
+   *
    * @param equalsFunction equals function to compare matched items with
+   *
    * @return builder instance
+   *
+   * @see #withEqualityPair(List)
    */
   public CollectionCmpBuilder<B, W> withEquals(final BiFunction<B, W, Boolean> equalsFunction)
   {
@@ -44,30 +53,47 @@ public class CollectionCmpBuilder<B, W>
   }
 
   /**
-   * Compare matched items based on equality pairs. All equality pairs must match in order for items to be considered equal.
+   * Compare matched items based on equality pair
    *
+   * @param equalityPair equality pair based on which objects are compared
+   *
+   * @return builder instance
+   *
+   * @see #withEqualityPair(List)
+   */
+  public final CollectionCmpBuilder<B, W> withEqualityPair(final EqualityPair<B, W> equalityPair)
+  {
+    equalsFunction = EqualsUtils.buildEqualsFunctionFromEqualityPairs(Collections.singletonList(equalityPair));
+    return this;
+  }
+
+  /**
+   * Compare matched items based on equality pairs. All equality pairs must match in order for items to be considered equal.
    * <p>Equality is a function that takes item as an input parameter and returns a value.
    * Two items are considered equal if the results of all it's equality pairs are equal.
-   *
    * <p>You can use this option to compare items of same type based on a few of their fields.
    *
-   * @see EqualityPair
    * @param equalityPairs equality pairs based on which objects are compared
+   *
    * @return builder instance
+   *
+   * @see EqualityPair
    */
-  @SafeVarargs
-  public final CollectionCmpBuilder<B, W> withEqualities(final EqualityPair<B, W>... equalityPairs)
+  public final CollectionCmpBuilder<B, W> withEqualityPair(final List<EqualityPair<B, W>> equalityPairs)
   {
-    equalsFunction = EqualsUtils.buildEqualsFunction(equalityPairs);
+    equalsFunction = EqualsUtils.buildEqualsFunctionFromEqualityPairs(equalityPairs);
     return this;
   }
 
   /**
    * Calls {@link CollectionCmp#compare(Function, Function, BiFunction)} with provided key extractors.
-   * @see CollectionCmp#compare(Function, Function, BiFunction)
+   *
    * @param baseKeyExtractor key extractor used to extract keys from items inside {@link #baseList}
    * @param workingKeyExtractor key extractor used to extract keys from items inside {@link #workingList}
+   *
    * @return compare result, containing all changes
+   *
+   * @see CollectionCmp#compare(Function, Function, BiFunction)
    */
   public CmpResult<B, W> compare(
       final Function<B, Serializable> baseKeyExtractor,

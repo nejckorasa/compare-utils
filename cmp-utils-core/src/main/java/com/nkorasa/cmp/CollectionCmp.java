@@ -15,6 +15,7 @@ import com.nkorasa.cmp.result.CmpResult;
 
 /**
  * Class to compare collections of objects
+ *
  * @param <B> base objects generic type
  * @param <W> working objects generic type
  */
@@ -32,12 +33,14 @@ public final class CollectionCmp<B, W>
   }
 
   /**
-   * Initializes builder {@link CollectionCmpBuilder} to compare collections of different object types (baseList and workingList).
-   * See {@link #ofSame(Collection, Collection)} to compare collections of objects of the same type.
+   * Initializes builder {@link CollectionCmpBuilder} to compare collections of different object types (baseList and
+   * workingList). See {@link #ofSame(Collection, Collection)} to compare collections of objects of the same type.
+   *
    * @param baseList base list to compare
    * @param workingList working list to compare base list with
    * @param <B> base objects generic type
    * @param <W> working objects generic type
+   *
    * @return builder to configure
    */
   public static <B, W> CollectionCmpBuilder<B, W> of(final Collection<B> baseList, final Collection<W> workingList)
@@ -48,9 +51,11 @@ public final class CollectionCmp<B, W>
   /**
    * Initializes builder {@link CollectionCmpBuilder} to compare collections of same object types (baseList and workingList).
    * See {@link #of(Collection, Collection)} to compare collections of objects of different type.
+   *
    * @param baseList base list to compare
    * @param workingList working list to compare base list with
    * @param <B> object generic type
+   *
    * @return builder to configure
    */
   public static <B> CollectionCmpSameBuilder<B> ofSame(final Collection<B> baseList, final Collection<B> workingList)
@@ -60,21 +65,19 @@ public final class CollectionCmp<B, W>
 
   /**
    * Compares collections.
-   *
    * <p>Items from {@link #baseList} and {@link #workingList} are compared and merged into pairs based on keys configured by
-   * baseKeyExtractor and workingKeyExtractor. Items matched together by the same key are later compared
-   * using equalsFunction.
-   *
+   * baseKeyExtractor and workingKeyExtractor. Items matched together by the same key are later compared using
+   * equalsFunction.
    * <p>Make sure that collections {@link #baseList} and {@link #workingList} can be partitioned
-   * using {@link CollectionCmpPartitioner#canPartition(Collection, Function)}. If keys collide and partitioning is not successful,
-   * compare result will not always be correct.
-   *
+   * using {@link CollectionCmpPartitioner#canPartition(Collection, Function)}. If keys collide and partitioning is not
+   * successful, compare result will not always be correct.
    * <p>The end result contains all changes found between collections - added, updated, removed, same and different items.
    * See {@link com.nkorasa.cmp.result.Diff} and {@link CmpResult}.
    *
    * @param baseKeyExtractor key extractor used to extract keys from items inside {@link #baseList}
    * @param workingKeyExtractor key extractor used to extract keys from items inside {@link #workingList}
    * @param equalsFunction equals function to compare items matched by key
+   *
    * @return compare result, containing all changes - information of added, updated, removed, different objects...
    */
   public CmpResult<B, W> compare(

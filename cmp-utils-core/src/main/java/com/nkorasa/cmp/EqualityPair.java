@@ -15,7 +15,7 @@ public class EqualityPair<B, W>
   private final Function<B, ?> baseEquality;
   private final Function<W, ?> workingEquality;
 
-  private EqualityPair(final Function<B, ?> baseEquality, final Function<W, ?> workingEquality)
+  public EqualityPair(final Function<B, ?> baseEquality, final Function<W, ?> workingEquality)
   {
     this.baseEquality = baseEquality;
     this.workingEquality = workingEquality;
