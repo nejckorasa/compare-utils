@@ -1,5 +1,6 @@
 package com.nkorasa.cmp.result;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EnumMap;
 import java.util.List;
@@ -18,12 +19,12 @@ import java.util.stream.Stream;
 public class CmpResult<B, W>
 {
   // changed
-  private final List<CmpPair<B, W>> removed;
-  private final List<CmpPair<B, W>> added;
-  private final List<CmpPair<B, W>> updated;
+  private final List<CmpPair<B, W>> removed = new ArrayList<>();
+  private final List<CmpPair<B, W>> added = new ArrayList<>();
+  private final List<CmpPair<B, W>> updated = new ArrayList<>();
 
   // unchanged
-  private final List<CmpPair<B, W>> unchanged;
+  private final List<CmpPair<B, W>> unchanged = new ArrayList<>();
 
   // counts
   private final int changesCount;
@@ -36,10 +37,10 @@ public class CmpResult<B, W>
       final List<CmpPair<B, W>> updated,
       final List<CmpPair<B, W>> unchanged)
   {
-    this.removed = removed;
-    this.added = added;
-    this.updated = updated;
-    this.unchanged = unchanged;
+    this.removed.addAll(removed);
+    this.added.addAll(added);
+    this.updated.addAll(updated);
+    this.unchanged.addAll(unchanged);
 
     changesCount = removed.size() + added.size() + updated.size();
     differentCount = removed.size() + added.size();
