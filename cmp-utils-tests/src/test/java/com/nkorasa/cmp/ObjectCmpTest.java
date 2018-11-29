@@ -48,13 +48,13 @@ public class ObjectCmpTest
   @Test
   public void sameObjectsMultipleEqualitiesEquals()
   {
-    assertTrue(ObjectCmp.equalEquality(new TestObject("1", 1), new TestObject("1", 1), Arrays.asList(TestObject::getIntField, TestObject::getStrField)));
+    assertTrue(ObjectCmp.equalEqualities(new TestObject("1", 1), new TestObject("1", 1), Arrays.asList(TestObject::getIntField, TestObject::getStrField)));
   }
 
   @Test
   public void sameObjectsMultipleEqualitiesNotEquals()
   {
-    assertFalse(ObjectCmp.equalEquality(new TestObject("1", 1), new TestObject("1", 2), Arrays.asList(TestObject::getIntField, TestObject::getStrField)));
+    assertFalse(ObjectCmp.equalEqualities(new TestObject("1", 1), new TestObject("1", 2), Arrays.asList(TestObject::getIntField, TestObject::getStrField)));
   }
 
   @Test
@@ -72,7 +72,7 @@ public class ObjectCmpTest
   @Test
   public void differentObjectsEqualityPairsEquals()
   {
-    assertTrue(ObjectCmp.equalEqualityPair(
+    assertTrue(ObjectCmp.equalEqualityPairs(
         new TestObject("1", 1),
         new TestObject2("1", 1L),
         Arrays.asList(
@@ -83,7 +83,7 @@ public class ObjectCmpTest
   @Test
   public void differentObjectsEqualityPairsNotEquals()
   {
-    assertFalse(ObjectCmp.equalEqualityPair(
+    assertFalse(ObjectCmp.equalEqualityPairs(
         new TestObject("1", 1),
         new TestObject2("1", 10L),
         Arrays.asList(
@@ -106,6 +106,27 @@ public class ObjectCmpTest
     assertFalse(ObjectCmp.equalEqualityPair(
         new TestObject("1", 1),
         new TestObject2("1", 10L),
+        EqualityPair.of(TestObject::getIntField, t -> t.getLongField().intValue())));
+  }
+
+  @Test
+  public void differentObjectsBothNull()
+  {
+    final TestObject obj1 = null;
+    final TestObject2 obj2 = null;
+    assertTrue(ObjectCmp.equalEqualityPair(
+        obj1,
+        obj2,
+        EqualityPair.of(TestObject::getIntField, t -> t.getLongField().intValue())));
+  }
+  @Test
+  public void differentObjectsOneNull()
+  {
+    final TestObject obj1 = null;
+    final TestObject2 obj2 = new TestObject2("1", 1L);
+    assertFalse(ObjectCmp.equalEqualityPair(
+        obj1,
+        obj2,
         EqualityPair.of(TestObject::getIntField, t -> t.getLongField().intValue())));
   }
 }
