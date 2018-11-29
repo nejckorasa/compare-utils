@@ -16,8 +16,9 @@ public final class ObjectCmp
   private ObjectCmp() { }
 
   /**
-   * Compares base and working objects using default equals function. Same as calling {@link Objects#compare(Object, Object,
-   * Comparator)}.
+   * Compares base and working objects using default equals function. Same as calling
+   * {@link Objects#equals(Object,Object)}
+   * <p>Comparison by reference is always performed first, also if one of the objects is {@code null}, false is returned.
    *
    * @param base base object to compare
    * @param working working object to compare
@@ -31,8 +32,10 @@ public final class ObjectCmp
   }
 
   /**
-   * Compares base and working objects using equals function equalsFunction.
-   *
+   * Compares base and working objects using equals function equalsFunction. Similar as calling
+   * {@link Objects#compare(Object, Object, Comparator)}
+   * <p>Comparison by reference is always performed first, also if one of the objects is {@code null}, false is returned.
+
    * @param base base object to compare
    * @param working working object to compare
    * @param equalsFunction equals function to compare objects with
@@ -48,6 +51,7 @@ public final class ObjectCmp
 
   /**
    * Compares base and working objects using equality
+   * <p>Comparison by reference is always performed first, also if one of the objects is {@code null}, false is returned.
    *
    * @param base base object to compare
    * @param working working object to compare
@@ -56,7 +60,7 @@ public final class ObjectCmp
    *
    * @return true/false whether objects are equal
    *
-   * @see #equalEquality(Object, Object, List)
+   * @see #equalEqualities(Object, Object, List)
    */
   public static <O> boolean equalEquality(final O base, final O working, final Function<O, ?> equality)
   {
@@ -69,6 +73,7 @@ public final class ObjectCmp
    * <p>Equality is a function that takes object as an input parameter and returns a value.
    * Two objects are considered equal if the results of all it's equalities are equal.
    * <p>You can use this option to compare objects of same type based on a few of their fields.
+   * <p>Comparison by reference is always performed first, also if one of the objects is {@code null}, false is returned.
    *
    * @param base base object to compare
    * @param working working object to compare
@@ -77,14 +82,14 @@ public final class ObjectCmp
    *
    * @return true/false whether objects are equal
    */
-  public static <O> boolean equalEquality(final O base, final O working, final List<Function<O, ?>> equalities)
+  public static <O> boolean equalEqualities(final O base, final O working, final List<Function<O, ?>> equalities)
   {
     return isEquals(base, working, EqualsUtils.buildEqualsFunctionFromEqualities(equalities));
   }
 
   /**
    * Compares base and working objects using equality pair
-   *
+   * <p>Comparison by reference is always performed first, also if one of the objects is {@code null}, false is returned.
    * @param base base object to compare
    * @param working working object to compare
    * @param equalityPair equality pair based on which objects are compared
@@ -94,7 +99,7 @@ public final class ObjectCmp
    * @return true/false whether objects are equal
    *
    * @see EqualityPair
-   * @see #equalEqualityPair(Object, Object, List)
+   * @see #equalEqualityPairs(Object, Object, List)
    */
   public static <B, W> boolean equalEqualityPair(final B base, final W working, final EqualityPair<B, W> equalityPair)
   {
@@ -110,7 +115,7 @@ public final class ObjectCmp
    * <p>Equality is a function that takes object as an input parameter and returns a value.
    * Two objects are considered equal if the results of all it's equalities are equal.
    * <p>You can use this option to compare objects of same type based on a few of their fields.
-   *
+   * <p>Comparison by reference is always performed first, also if one of the objects is {@code null}, false is returned.
    * @param base base object to compare
    * @param working working object to compare
    * @param equalityPairs equality pairs based on which objects are compared
@@ -121,7 +126,7 @@ public final class ObjectCmp
    *
    * @see EqualityPair
    */
-  public static <B, W> boolean equalEqualityPair(final B base, final W working, final List<EqualityPair<B, W>> equalityPairs)
+  public static <B, W> boolean equalEqualityPairs(final B base, final W working, final List<EqualityPair<B, W>> equalityPairs)
   {
     return isEquals(base, working, EqualsUtils.buildEqualsFunctionFromEqualityPairs(equalityPairs));
   }
@@ -131,6 +136,16 @@ public final class ObjectCmp
     if (equalsFunction == null)
     {
       return Objects.equals(base, working);
+    }
+
+    if (base == working)
+    {
+      return true;
+    }
+
+    if (base == null ^ working == null)
+    {
+      return false;
     }
 
     return equalsFunction.apply(base, working);

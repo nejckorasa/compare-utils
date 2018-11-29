@@ -19,7 +19,7 @@ import com.nkorasa.cmp.result.CmpResult;
  * @param <B> base objects generic type
  * @param <W> working objects generic type
  */
-@SuppressWarnings({"unused", "OverloadedVarargsMethod"})
+@SuppressWarnings({"OverloadedVarargsMethod"})
 public final class CollectionCmp<B, W>
 {
   private final Collection<B> baseList;

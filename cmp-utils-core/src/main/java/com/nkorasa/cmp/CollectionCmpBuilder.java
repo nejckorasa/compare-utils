@@ -44,7 +44,7 @@ public class CollectionCmpBuilder<B, W>
    *
    * @return builder instance
    *
-   * @see #withEqualityPair(List)
+   * @see #withEqualityPairs(List)
    */
   public CollectionCmpBuilder<B, W> withEquals(final BiFunction<B, W, Boolean> equalsFunction)
   {
@@ -59,7 +59,7 @@ public class CollectionCmpBuilder<B, W>
    *
    * @return builder instance
    *
-   * @see #withEqualityPair(List)
+   * @see #withEqualityPairs(List)
    */
   public final CollectionCmpBuilder<B, W> withEqualityPair(final EqualityPair<B, W> equalityPair)
   {
@@ -79,7 +79,7 @@ public class CollectionCmpBuilder<B, W>
    *
    * @see EqualityPair
    */
-  public final CollectionCmpBuilder<B, W> withEqualityPair(final List<EqualityPair<B, W>> equalityPairs)
+  public final CollectionCmpBuilder<B, W> withEqualityPairs(final List<EqualityPair<B, W>> equalityPairs)
   {
     equalsFunction = EqualsUtils.buildEqualsFunctionFromEqualityPairs(equalityPairs);
     return this;

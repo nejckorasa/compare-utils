@@ -56,7 +56,7 @@ public class CollectionCmpSameBuilder<O>
    *
    * @return builder instance
    *
-   * @see #withEquality(List)
+   * @see #withEqualities(List)
    */
   public final CollectionCmpSameBuilder<O> withEquality(final Function<O, ?> equality)
   {
@@ -74,7 +74,7 @@ public class CollectionCmpSameBuilder<O>
    *
    * @return builder instance
    */
-  public final CollectionCmpSameBuilder<O> withEquality(final List<Function<O, ?>> equalities)
+  public final CollectionCmpSameBuilder<O> withEqualities(final List<Function<O, ?>> equalities)
   {
     equalsFunction = EqualsUtils.buildEqualsFunctionFromEqualities(equalities);
     return this;
