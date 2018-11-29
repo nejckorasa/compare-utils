@@ -43,14 +43,14 @@ public final class CollectionCmp<B, W>
    *
    * @return builder to configure
    */
-  public static <B, W> CollectionCmpBuilder<B, W> of(final Collection<B> baseList, final Collection<W> workingList)
+  public static <B, W> CollectionCmpBuilder<B, W> ofDifferent(final Collection<B> baseList, final Collection<W> workingList)
   {
     return new CollectionCmpBuilder<>(baseList, workingList);
   }
 
   /**
    * Initializes builder {@link CollectionCmpBuilder} to compare collections of same object types (baseList and workingList).
-   * See {@link #of(Collection, Collection)} to compare collections of objects of different type.
+   * See {@link #ofDifferent(Collection, Collection)} to compare collections of objects of different type.
    *
    * @param baseList base list to compare
    * @param workingList working list to compare base list with

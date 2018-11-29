@@ -13,9 +13,7 @@ import java.util.function.Function;
 @SuppressWarnings({"OverloadedVarargsMethod", "ObjectEquality", "BooleanMethodNameMustStartWithQuestion"})
 public final class ObjectCmp
 {
-  private ObjectCmp()
-  {
-  }
+  private ObjectCmp() { }
 
   /**
    * Compares base and working objects using default equals function. Same as calling {@link Objects#compare(Object, Object,
@@ -25,7 +23,7 @@ public final class ObjectCmp
    * @param working working object to compare
    * @param <O> objects generic type
    *
-   * @return true/false weather objects are equal
+   * @return true/false whether objects are equal
    */
   public static <O> boolean equals(final O base, final O working)
   {
@@ -41,7 +39,7 @@ public final class ObjectCmp
    * @param <B> base objects generic type
    * @param <W> working objects generic type
    *
-   * @return true/false weather objects are equal
+   * @return true/false whether objects are equal
    */
   public static <B, W> boolean equals(final B base, final W working, final BiFunction<B, W, Boolean> equalsFunction)
   {
@@ -56,7 +54,7 @@ public final class ObjectCmp
    * @param equality equality based on which objects are compared
    * @param <O> objects generic type
    *
-   * @return true/false weather objects are equal
+   * @return true/false whether objects are equal
    *
    * @see #equalEquality(Object, Object, List)
    */
@@ -77,7 +75,7 @@ public final class ObjectCmp
    * @param equalities equalities based on which objects are compared
    * @param <O> objects generic type
    *
-   * @return true/false weather objects are equal
+   * @return true/false whether objects are equal
    */
   public static <O> boolean equalEquality(final O base, final O working, final List<Function<O, ?>> equalities)
   {
@@ -93,7 +91,7 @@ public final class ObjectCmp
    * @param <B> objects generic type
    * @param <W> working generic type
    *
-   * @return true/false weather objects are equal
+   * @return true/false whether objects are equal
    *
    * @see EqualityPair
    * @see #equalEqualityPair(Object, Object, List)
@@ -119,7 +117,7 @@ public final class ObjectCmp
    * @param <B> objects generic type
    * @param <W> working generic type
    *
-   * @return true/false weather objects are equal
+   * @return true/false whether objects are equal
    *
    * @see EqualityPair
    */
@@ -133,16 +131,6 @@ public final class ObjectCmp
     if (equalsFunction == null)
     {
       return Objects.equals(base, working);
-    }
-
-    if (base == working)
-    {
-      return true;
-    }
-
-    if (base == null ^ working == null)
-    {
-      return false;
     }
 
     return equalsFunction.apply(base, working);

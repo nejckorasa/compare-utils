@@ -139,7 +139,7 @@ public class CollectionCmpTest
     );
 
     final CmpResult<TestObject, TestObject2> compareResult = CollectionCmp
-        .of(baseList, workingList)
+        .ofDifferent(baseList, workingList)
         .withEquals((o1, o2) -> o1.getIntField() == o2.getLongField().intValue())
         .compare(TestObject::getStrField, TestObject2::getStrField);
 
@@ -176,7 +176,7 @@ public class CollectionCmpTest
     );
 
     final CmpResult<TestObject, TestObject2> compareResult = CollectionCmp
-        .of(baseList, workingList)
+        .ofDifferent(baseList, workingList)
         .withEqualityPair(Arrays.asList(
             EqualityPair.of(TestObject::getIntField, o2 -> o2.getLongField().intValue()),
             EqualityPair.of(TestObject::getStrField, TestObject2::getStrField)))
