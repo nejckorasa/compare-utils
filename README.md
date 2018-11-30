@@ -1,10 +1,10 @@
-# Cmp Utils
+# Compare Utils
 
 [![Build Status](https://travis-ci.com/nejckorasa/cmp-utils.svg?token=pfWZRfNyzeRf4kWWpnbs&branch=master)](https://travis-ci.com/nejckorasa/cmp-utils)
 
-Comparing of Java objects and collections of objects made easy!
+Compares of Java Objects and Collections made easy
 
-It provides easy way to compare collections of objects of different type as well as compare just objects alone.
+It provides easy way to compare Java Collections and Java Objects of same or different type.
 
 ## Todo [stay tuned]
 
@@ -13,5 +13,5 @@ It provides easy way to compare collections of objects of different type as well
 
 ## Docs 📄
 
-[Javadoc](https://nejckorasa.github.io/cmp-utils/) documentation is provided
+[Javadoc](https://nejckorasa.github.io/compare-utils/) documentation is provided
 
