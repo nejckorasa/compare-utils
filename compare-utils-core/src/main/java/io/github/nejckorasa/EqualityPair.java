@@ -1,4 +1,4 @@
-package com.nkorasa.compares;
+package io.github.nejckorasa;
 
 import java.util.function.Function;
 

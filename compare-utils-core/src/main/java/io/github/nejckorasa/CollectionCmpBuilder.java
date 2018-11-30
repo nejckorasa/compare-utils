@@ -1,4 +1,4 @@
-package com.nkorasa.compares;
+package io.github.nejckorasa;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import com.nkorasa.compares.result.CmpResult;
+import io.github.nejckorasa.result.CmpResult;
 
 /**
  * Builder used to configure comparing of collections of different objects performed in {@link CollectionCmp}

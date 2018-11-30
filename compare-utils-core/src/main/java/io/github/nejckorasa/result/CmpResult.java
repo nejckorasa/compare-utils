@@ -1,4 +1,4 @@
-package com.nkorasa.compares.result;
+package io.github.nejckorasa.result;
 
 import java.util.ArrayList;
 import java.util.Collection;

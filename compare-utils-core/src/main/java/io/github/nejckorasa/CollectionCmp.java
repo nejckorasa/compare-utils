@@ -1,4 +1,4 @@
-package com.nkorasa.compares;
+package io.github.nejckorasa;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,8 +10,9 @@ import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import com.nkorasa.compares.result.CmpPair;
-import com.nkorasa.compares.result.CmpResult;
+import io.github.nejckorasa.result.CmpPair;
+import io.github.nejckorasa.result.CmpResult;
+import io.github.nejckorasa.result.Diff;
 
 /**
  * Class to compare collections of objects
@@ -72,7 +73,7 @@ public final class CollectionCmp<B, W>
    * using {@link CollectionCmpPartitioner#canPartition(Collection, Function)}. If keys collide and partitioning is not
    * successful, compare result will not always be correct.
    * <p>The end result contains all changes found between collections - added, updated, removed, same and different items.
-   * See {@link com.nkorasa.compares.result.Diff} and {@link CmpResult}.
+   * See {@link Diff} and {@link CmpResult}.
    *
    * @param baseKeyExtractor key extractor used to extract keys from items inside {@link #baseList}
    * @param workingKeyExtractor key extractor used to extract keys from items inside {@link #workingList}

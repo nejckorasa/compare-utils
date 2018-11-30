@@ -1,4 +1,4 @@
-package com.nkorasa.compares.result;
+package io.github.nejckorasa.result;
 
 /**
  * Difference type between matched objects

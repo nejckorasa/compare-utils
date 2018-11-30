@@ -1,10 +1,10 @@
-package com.nkorasa.compares;
+package io.github.nejckorasa;
 
 import java.util.Arrays;
 import java.util.List;
 
-import com.nkorasa.compares.result.CmpResult;
-import com.nkorasa.compares.result.Diff;
+import io.github.nejckorasa.result.CmpResult;
+import io.github.nejckorasa.result.Diff;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
