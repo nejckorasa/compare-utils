@@ -2,12 +2,12 @@ package io.github.nejckorasa;
 
 import java.util.Objects;
 
-class TestObject
+public class TestObject
 {
   private String strField;
   private Integer intField;
 
-  TestObject(final String strField, final Integer intField)
+  public TestObject(final String strField, final Integer intField)
   {
     this.strField = strField;
     this.intField = intField;

@@ -2,12 +2,12 @@ package io.github.nejckorasa;
 
 import java.util.Objects;
 
-class TestObject2
+public class TestObject2
 {
   private String strField;
   private Long longField;
 
-  TestObject2(final String strField, final Long longField)
+  public TestObject2(final String strField, final Long longField)
   {
     this.strField = strField;
     this.longField = longField;
