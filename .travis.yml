@@ -1,4 +1,2 @@
 language: java
-script:
-  - mvn install -Dgpg.sign=false -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-  - mvn test -B
+install: mvn install -DskipTests -Dgpg.skip -Dmaven.javadoc.skip=true -B -V
