@@ -1,6 +1,6 @@
 # Compare Utils
 
-[![Build Status](https://travis-ci.com/nejckorasa/cmp-utils.svg?token=pfWZRfNyzeRf4kWWpnbs&branch=master)](https://travis-ci.com/nejckorasa/cmp-utils)
+[![Build Status](https://travis-ci.com/nejckorasa/compare-utils.svg?branch=master)](https://travis-ci.com/nejckorasa/compare-utils)
 
 Compares of Java Objects and Collections made easy
 
