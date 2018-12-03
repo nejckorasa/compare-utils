@@ -4,7 +4,7 @@
 
     <groupId>io.github.nejckorasa</groupId>
     <artifactId>compare-utils-parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.2-RELEASE</version>
 
     <name>Compare Utils Parent</name>
     <description>Parent of Compare Utils library</description>
@@ -19,7 +19,7 @@
     </modules>
 
     <properties>
-        <compare-utils.version>1.0-SNAPSHOT</compare-utils.version>
+        <compare-utils.version>1.0.2-RELEASE</compare-utils.version>
         <commons-lang3.version>3.8.1</commons-lang3.version>
     </properties>
 
@@ -33,7 +33,7 @@
             </dependency>
 
             <dependency>
-                <groupId>ccom.nkorasa</groupId>
+                <groupId>io.github.nejckorasa</groupId>
                 <artifactId>compare-utils-tests</artifactId>
                 <version>${compare-utils.version}</version>
             </dependency>
