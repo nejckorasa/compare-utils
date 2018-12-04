@@ -170,7 +170,10 @@ Objects are compared using same features as comparing in collections above (see 
 
 ```java
 // check if objects are equal based on it's name, code and description
-boolean equals = ObjectCmp.equalEqualities(object1, object2, Arrays.asList(o -> o.getName(), o -> o.getCode(), o -> o.getDescription())));
+boolean equals = ObjectCmp.equalEqualities(
+    object1, 
+    object2, 
+    Arrays.asList(o -> o.getName(), o -> o.getCode(), o -> o.getDescription())));
 ```
 
 ## Contributing
