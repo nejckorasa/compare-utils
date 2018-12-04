@@ -3,6 +3,7 @@
 [ ![Download](https://maven-badges.herokuapp.com/maven-central/io.github.nejckorasa/compare-utils-core/badge.svg) ](https://maven-badges.herokuapp.com/maven-central/io.github.nejckorasa/compare-utils-core)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/48793689ebd14073b3875b427792404d)](https://www.codacy.com/app/nejckorasa/compare-utils?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nejckorasa/compare-utils&amp;utm_campaign=Badge_Grade)
 [![Build Status](https://travis-ci.com/nejckorasa/compare-utils.svg?branch=master)](https://travis-ci.com/nejckorasa/compare-utils)
+[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)]( https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fnejckorasa%2Fcompare-utils&via=nejckorasa&text=Great%20Java%20Compare%20Diff%20Utils%20library%20to%20compare%20objects%20and%20collecitons&hashtags=java%2Cgithub%2Ccode%2Cdevelopment%2Cdevelopers%2Cprogramming%2Cprogrammers%2Ccomparator%2Csoftware%2Cdeveloping)
 
 ## Intro 
 
