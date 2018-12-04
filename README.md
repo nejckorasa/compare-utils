@@ -1,6 +1,6 @@
 # Compare Utils
 
-[![Build Status](https://travis-ci.com/nejckorasa/compare-utils.svg?branch=master)](https://travis-ci.com/nejckorasa/compare-utils)
+[ ![Download](https://maven-badges.herokuapp.com/maven-central/io.github.nejckorasa/compare-utils-core/badge.svg) ](https://maven-badges.herokuapp.com/maven-central/io.github.nejckorasa/compare-utils-core) [![Build Status](https://travis-ci.com/nejckorasa/compare-utils.svg?branch=master)](https://travis-ci.com/nejckorasa/compare-utils)
 
 Compares of Java Objects and Collections made easy
 
