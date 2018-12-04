@@ -145,11 +145,11 @@ compareResult.streamChanged()
 All result data is provided in Pairs, containing matched base and working item as well as difference type:
 
 ```java
-List<CmpPair<B, W>> updated = compareResult.getUdpated();
-
 CmpPair<B, W> pair = ...
-B b = pair.getBase();
-W w = pair.getWorking();
+
+B base = pair.getBase();
+W working = pair.getWorking();
+
 Diff diff = pair.getDiff(); // UNCHANGED, UPDATED, ADDED, REMOVED
 Serializable key = pair.getKey(); // key by which items are matched together
 ```
