@@ -7,7 +7,7 @@
 
 ## Intro 
 
-Compares of Java Objects and Collections made easy
+Compares of Java Collections and Objects made easy.
 
 It provides easy way to compare Java Collections and Java Objects of same or different type when Java's equals functions and Java's Comparators don't suffice and you want to compare objects differently. 
 
@@ -101,7 +101,7 @@ In example above, items are considered equal when **name**, **code** and **descr
 
 ```java
 CollectionCmp
-        .ofSame(baseList, workingList)
+        .ofDifferent(baseList, workingList)
         .withEqualityPairs(Arrays.asList(
             EqualityPair.of(baseItem -> baseItem.getName(), workingItem -> workingItem.getData().getName()),
             EqualityPair.of(baseItem -> baseItem.getCode(), workingItem -> workingItem.getData().getCode()))) // equalityPairs
