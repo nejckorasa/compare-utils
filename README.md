@@ -9,7 +9,7 @@
 
 Compares of Java Collections and Objects made easy.
 
-It provides easy way to compare Java Collections and Java Objects of same or different type when Java's equals functions and Java's Comparators don't suffice and you want to compare objects differently. 
+It provides easy way to **compare Java Collections** and **Java Objects** of same or different type when Java's equals functions and Java's Comparators don't suffice and you want to compare objects differently. 
 
 Compare result of collections is presented with clear separation of **added**, **removed**, **updated** and **unchanged** items.
 
