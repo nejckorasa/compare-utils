@@ -9,7 +9,7 @@
 
 Compares of Java Collections and Objects made easy.
 
-It provides easy way to **compare Java Collections** and **Java Objects** of same or different type when Java's equals functions and Java's Comparators don't suffice and you want to compare objects differently. 
+It provides easy way to **compare Java Collections** and **Java Objects** of same or different class when Java's equals functions and Java's Comparators don't suffice and you want to compare objects differently. 
 
 Compare result of collections is presented with clear separation of **added**, **removed**, **updated** and **unchanged** items.
 
@@ -37,13 +37,59 @@ compile 'io.github.nejckorasa:compare-utils:1.0.2-RELEASE'
 
 ## Features
 
+At first glance it might seem that this is no different than using Java's own `Comparator` and even Java's `equals` functions. 
+For some cases it is indeed easier to use `Comparator` and you should! 
+
+A few examples where using this library is useful:
+
+- **Compare collections of different object classes**
+    - Specify `keyExtractor` and your own `equals` function
+    - Instead of writing equals function, you can compare objects by comparing only some of it's fields. See example below and _equalities or equalityPairs_ definitions in [Comparing](https://github.com/nejckorasa/compare-utils/blob/master/README.md#comparing).
+
+- **Compare objects (of same or different class) by comparing only some of it's fields**
+    - All you need to do is list field extractors, see example below.
+
+```java
+Class1 {
+    long id;
+    int firstProperty;
+    String secondProperty;
+    ...
+}
+
+Class2 {
+    long id;
+    int propertyOne;
+    String propertyTwo;
+    ...
+}
+
+// Compare collections of different classes by only comparing 2 of their fields and matching by id
+
+CollectionCmp
+    .ofDifferent(class1List, class2List)
+    .withEqualityPairs(Arrays.asList(
+        EqualityPair.of(o1 -> o1.getFirstProperty(), o2 -> o2.getPropertyOne()),
+        EqualityPair.of(o1 -> o1.getSecondProperty(), o2 -> o2.getPropertyTwo()))) // equalityPairs
+    .compare(item -> item.getId()); // keyExtractor
+    
+// Compare objects of different classes by only comparing 2 of their fields
+
+ObjectCmp.equalEqualityPairs(
+  class1Object,
+  class2Object,
+  Arrays.asList(
+      EqualityPair.of(o1 -> o1.getFirstProperty(), o2 -> o2.getPropertyOne()),
+      EqualityPair.of(o1 -> o1.getSecondProperty(), o2 -> o2.getPropertyTwo())));
+```
+
 [Tests](https://github.com/nejckorasa/compare-utils/tree/master/compare-utils-tests/src/test/java/io/github/nejckorasa) also include some examples that you might find useful.
 
 ### Collections compare
 
 #### Basics
 
-It provides comparing and finding differences between two collection - _base_ and _working_ collection. Items in collections can be of same or different type, both are supported. Two steps are important to understand how comparison is made and differences are found:
+It provides comparing and finding differences between two collection - _base_ and _working_ collection. Items in collections can be of same or different classes, both are supported. Two steps are important to understand how comparison is made and differences are found:
 
 1. Matching
 
@@ -62,7 +108,7 @@ CollectionCmp
         .ofSame(baseList, workingList)
         .compare(item -> item.getId()); // keyExtractor function
 ```
-or when comparing collections of different item types:
+or when comparing collections of different item classes:
 
 ```java
 CollectionCmp
@@ -97,7 +143,7 @@ CollectionCmp
         .compare(item -> item.getId()); // keyExtractor
 ```
 
-In example above, items are considered equal when **name**, **code** and **description** fields are equal. Similarly with collections of different types, **equalityPairs** are used:
+In example above, items are considered equal when **name**, **code** and **description** fields are equal. Similarly with collections of different classes, **equalityPairs** are used:
 
 ```java
 CollectionCmp
@@ -107,7 +153,7 @@ CollectionCmp
             EqualityPair.of(baseItem -> baseItem.getCode(), workingItem -> workingItem.getData().getCode()))) // equalityPairs
         .compare(item -> item.getId()); // keyExtractor
 ```
-Now, items are considered equal when **name**, **code** properties are equal. Because base and working items are not of same type,properties may exist on different paths.
+Now, items are considered equal when **name**, **code** properties are equal. Because base and working items are not of same class, properties may exist on different paths.
 
 > **equalsFunction** is optional, if nothing is provided, `Objects.equals()` is used to compare matched items.
 
