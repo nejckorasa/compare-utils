@@ -7,15 +7,19 @@
 
 ## Intro 
 
-Compares of Java Collections and Objects made easy.
+Comparing of Java Collections and Objects made easy.
 
-It provides easy way to **compare Java Collections** and **Java Objects** of same or different class when Java's equals functions and Java's Comparators don't suffice and you want to compare objects differently. 
+Minimalistic library written in core Java with no other dependencies. 
 
-Compare result of collections is presented with clear separation of **added**, **removed**, **updated** and **unchanged** items.
+It provides easy way to compare **Collections** and **Objects** of same or different class when Java's equals functions and Java's Comparators don't suffice. 
 
-## Install 
+Collections compare result is presented with clear separation of **added**, **removed**, **updated** and **unchanged** items.
 
-Using **Maven** simple add following dependency:
+See [Javadoc documentation](https://nejckorasa.github.io/compare-utils/).
+
+## Add to your project 
+
+#### Maven
 
 ```xml
 <dependency>
@@ -25,168 +29,169 @@ Using **Maven** simple add following dependency:
 </dependency>
 ```
 
-or with **Gradle**:
+#### Gradle
 
 ```gradle
 compile 'io.github.nejckorasa:compare-utils:1.0.2-RELEASE'
 ```
 
-## Docs
+## Usage
 
-[Javadoc](https://nejckorasa.github.io/compare-utils/) documentation is provided
+At first glance it might seem that this is no different from using Java's own `Comparator` and even Java's `equals` functions. 
+For some use cases it is indeed easier to use `Comparator`, and you should do so! 
 
-## Features
-
-At first glance it might seem that this is no different than using Java's own `Comparator` and even Java's `equals` functions. 
-For some cases it is indeed easier to use `Comparator` and you should! 
-
-A few examples where using this library is useful:
+A few examples where this library is useful:
 
 - **Compare collections of different object classes**
     - Specify `keyExtractor` and your own `equals` function
-    - Instead of writing equals function, you can compare objects by comparing only some of it's fields. See example below and _equalities or equalityPairs_ definitions in [Comparing](https://github.com/nejckorasa/compare-utils/blob/master/README.md#comparing).
+    - Instead of writing equals function, you can compare objects by comparing only some of its fields
 
-- **Compare objects (of same or different class) by comparing only some of it's fields**
-    - All you need to do is list field extractors, see example below.
+- **Compare objects (of same or different class) by comparing only some of its fields**
+    - Define field extractors
+
+#### Example
+
+Given some classes and 2 collections:
 
 ```java
-Class1 {
+static SomeClass {
     long id;
     int firstProperty;
     String secondProperty;
-    ...
+    // other fields emitted...
 }
 
-Class2 {
+static OtherClass {
     long id;
     int propertyOne;
     String propertyTwo;
-    ...
+    // other fields emitted...
 }
+```
+Compare collections of different classes by only comparing 2 of their fields and matching by `id`:
 
-// Compare collections of different classes by only comparing 2 of their fields and matching by id
+```java
+List<SomeClass> firstList;
+List<OtherClass> secondList;
 
 CollectionCmp
-    .ofDifferent(class1List, class2List)
-    .withEqualityPairs(Arrays.asList(
-        EqualityPair.of(o1 -> o1.getFirstProperty(), o2 -> o2.getPropertyOne()),
-        EqualityPair.of(o1 -> o1.getSecondProperty(), o2 -> o2.getPropertyTwo()))) // equalityPairs
-    .compare(item -> item.getId()); // keyExtractor
-    
-// Compare objects of different classes by only comparing 2 of their fields
-
-ObjectCmp.equalEqualityPairs(
-  class1Object,
-  class2Object,
-  Arrays.asList(
-      EqualityPair.of(o1 -> o1.getFirstProperty(), o2 -> o2.getPropertyOne()),
-      EqualityPair.of(o1 -> o1.getSecondProperty(), o2 -> o2.getPropertyTwo())));
+    .of(firstList, secondList, o1 -> o1.getId(), o2 -> o2.getId())
+    .compare(
+        EqualityPair.of(o1 -> o1.firstProperty(), o2 -> o2.propertyOne()),
+        EqualityPair.of(o1 -> o1.secondProperty(), o2 -> o2.propertyTwo())
+);
 ```
 
-[Tests](https://github.com/nejckorasa/compare-utils/tree/master/compare-utils-tests/src/test/java/io/github/nejckorasa) also include some examples that you might find useful.
+Compare objects of different classes by only comparing 2 of their fields:
 
-### Collections compare
+```java
+SomeClass first;
+OtherClass second;
+
+ObjectCmp.equals(
+        first,
+        second,
+        EqPair.of((o1 -> o1.firstProperty(), o2 -> o2.propertyOne()),
+        EqPair.of(o1 -> o1.secondProperty(), o2 -> o2.propertyTwo())
+);
+```
+
+Find more examples in [tests](src/test/java/io/github/nejckorasa). 
+
+## Collections compare
 
 #### Basics
 
-It provides comparing and finding differences between two collection - _base_ and _working_ collection. Items in collections can be of same or different classes, both are supported. Two steps are important to understand how comparison is made and differences are found:
+It provides comparing and finding differences between two collections (_base_ and _working_). Items in collections can be of same or different classes. Two steps are important to understand how comparison is made and how differences are found:
 
-1. Matching
+1. **Matching**
 
-   First, items from both collections are matched together by their keys. Each item is assigned it's own **key**. Keys are computed using provided **keyExtractor** functions. When 2 items match they form a **Pair**.
+   First, items from both collections are matched together by their keys. Provided `keyExtractor` functions are used to extract the keys. When 2 items match they form a **Pair**.
 
-2. Comparing
+2. **Comparing**
 
-   Each pair is compared using provided **equalsFunction**, **equalities** or **equalityPairs**.
+   Provided `equalsFunction`, `equalities` or `equalityPairs` are used to compare the pairs.
 
 #### Matching
 
-Matching is computed using **keyExtractor** functions. For example:
+Matching is computed using keyExtractor functions, for example `i -> i.getId()`:
 
 ```java
 CollectionCmp
-        .ofSame(baseList, workingList)
-        .compare(item -> item.getId()); // keyExtractor function
+        .of(baseList, workingList, i -> i.getId())
+        .compare();
 ```
 or when comparing collections of different item classes:
 
 ```java
 CollectionCmp
-        .ofDifferent(baseList, workingList)
-        .compare(baseItem -> baseItem.getId(), workingItem -> workingItem.getId()); // keyExtractor functions for base and working items
+        .of(baseList, workingList, b -> b.getId(), w -> w.getId()) // keyExtractor functions for base and working items
+        .compare(); // keyExtractor functions for base and working items
 ```
 
 > **keyExtractors** are not optional and must always be provided.
 
 #### Comparing
 
-Comparing is performed on items that are matched together (they form a Pair). This is done by **equalsFunction** that can be defined in a few different ways:
+Comparing is performed on items that are matched together (they form a Pair). This is done by equals function which can be defined in a few different ways, using `compare(...)` function:
 
 _equalsFunction_
 
 ```java
 CollectionCmp
-        .ofSame(baseList, workingList)
-        .withEquals((item1, item2) -> item1.getName().equals(item2.getName())) // equalsFunction
-        .compare(item -> item.getId()); // keyExtractor
+        .of(baseList, workingList, i -> i.getId())
+        .compare((i1, i2) -> i1.getName().equals(i2.getName()));
 ```
 
-_equalities_ or _equalityPairs_
+_equalities_ or _equality pairs_
 
 ```java
 CollectionCmp
-        .ofSame(baseList, workingList)
-        .withEqualities(Arrays.asList(
+        .of(baseList, workingList, i -> i.getId())
+        .compare(
           item -> item.getName(), 
           item -> item.getCode(), 
-          item -> item.getDescription())) // equalities
-        .compare(item -> item.getId()); // keyExtractor
+          item -> item.getDescription());
 ```
 
-In example above, items are considered equal when **name**, **code** and **description** fields are equal. Similarly with collections of different classes, **equalityPairs** are used:
+In example above, items are considered equal when `name`, `code` and `description` fields are equal. Similarly with collections of different classes, equality pairs are used:
 
 ```java
 CollectionCmp
-        .ofDifferent(baseList, workingList)
-        .withEqualityPairs(Arrays.asList(
-            EqualityPair.of(baseItem -> baseItem.getName(), workingItem -> workingItem.getData().getName()),
-            EqualityPair.of(baseItem -> baseItem.getCode(), workingItem -> workingItem.getData().getCode()))) // equalityPairs
-        .compare(item -> item.getId()); // keyExtractor
+        .of(baseList, workingList, b -> b.getId(), w -> w.getId())
+        .compare(
+            EqPair.of(b -> b.getName(), w -> w.getData().getName()),
+            EqPair.of(b -> b.getCode(), w -> w.getData().getCode()));
 ```
-Now, items are considered equal when **name**, **code** properties are equal. Because base and working items are not of same class, properties may exist on different paths.
+Now, items are considered equal when `name` and `code` fields are equal. Because base and working items are not of same class, fields may exist on different paths.
 
-> **equalsFunction** is optional, if nothing is provided, `Objects.equals()` is used to compare matched items.
+> **equalsFunction** is optional, by default `Objects.equals()` is used to compare matched items.
 
 #### Result
 
 Compare result of collections is presented with clear separation of **added**, **removed**, **updated** and **unchanged** items. Result object has a few useful functions to help you analyze result data:
 
 ```java
-CmpResult<O, O> compareResult = CollectionCmp
-        .ofSame(baseList, workingList)
-        .withEquality(item -> item.getName())
-        .compare(item -> item.getId()); // keyExtractor
+var compareResult = CollectionCmp
+        .of(baseList, workingList, i -> i.getId())
+        .compare(i -> i.getName());
 
 boolean hasChanges = compareResult.hasChanges();
 int changesCount = compareResult.getChangesCount();
 
-// different items are added and removed items ...
 boolean hasDifferences = compareResult.hasDifferences();
 int differentCount = compareResult.getDifferentCount();
 
 compareResult.getAll();
 compareResult.getAdded();
 compareResult.getUdpated();
-...
 
-// changed items are added and removed or updated items ...
+// changed are all items that were added, removed or updated
 compareResult.getChanged();
 compareResult.getUncanged();
 
 // stream through changed, unchanged, added, different items ...
 compareResult.streamChanged()
-        .map( ... )
-        ...
 ```
 
 All result data is provided in Pairs, containing matched base and working item as well as difference type:
@@ -203,7 +208,7 @@ Serializable key = pair.getKey(); // key by which items are matched together
 
 #### Partitioning 
 
-Matching must be a **injective** function (in both ways) == there must be at most one item with the same key in each collection. If that condition is not met, collection cannot be partitioned and collections compare result might not be correct.
+Matching must be a **injective** function (in both ways) == there must be at most one item with the same key in each collection. If that is not true, collection cannot be partitioned and collections compare result might be incorrect.
 
 You can check if collection can be partitioned using:
 
@@ -211,16 +216,16 @@ You can check if collection can be partitioned using:
 boolean canPartition = CollectionCmpPartitioner.canPartition(collection, keyExtractor)
 ```
 
-### Objects compare
+## Objects compare
 
-Objects are compared using same features as comparing in collections above (see [Comparing](https://github.com/nejckorasa/compare-utils/blob/master/README.md#comparing)), for example:
+Objects are compared using same features as comparing collections above, for example:
 
 ```java
 // check if objects are equal based on it's name, code and description
-boolean equals = ObjectCmp.equalEqualities(
+boolean equals = ObjectCmp.equals(
     object1, 
     object2, 
-    Arrays.asList(o -> o.getName(), o -> o.getCode(), o -> o.getDescription())));
+    o -> o.getName(), o -> o.getCode(), o -> o.getDescription());
 ```
 
 ## Contributing
