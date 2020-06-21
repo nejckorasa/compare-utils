@@ -15,7 +15,7 @@ It provides easy way to compare **Collections** and **Objects** of same or diffe
 
 Collections compare result is presented with clear separation of **added**, **removed**, **updated** and **unchanged** items.
 
-See [Javadoc documentation](https://nejckorasa.github.io/compare-utils/).
+See [Javadoc documentation](https://nejckorasa.github.io/compare-utils/docs).
 
 ## Add to your project 
 
