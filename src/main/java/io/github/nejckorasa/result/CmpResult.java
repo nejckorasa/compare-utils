@@ -2,11 +2,9 @@ package io.github.nejckorasa.result;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static io.github.nejckorasa.result.Diff.ADDED;
@@ -20,13 +18,10 @@ public class CmpResult<B, W> {
     private final List<CmpPair<B, W>> removed = new ArrayList<>();
     private final List<CmpPair<B, W>> added = new ArrayList<>();
     private final List<CmpPair<B, W>> updated = new ArrayList<>();
-
     private final List<CmpPair<B, W>> unchanged = new ArrayList<>();
-
     private final int changesCount;
     private final int differentCount;
 
-    @SuppressWarnings("AssignmentOrReturnOfFieldWithMutableType")
     public CmpResult(List<CmpPair<B, W>> removed, List<CmpPair<B, W>> added, List<CmpPair<B, W>> updated, List<CmpPair<B, W>> unchanged) {
         this.removed.addAll(removed);
         this.added.addAll(added);

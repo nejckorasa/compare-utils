@@ -1,5 +1,9 @@
 package io.github.nejckorasa;
 
+import io.github.nejckorasa.result.CmpPair;
+import io.github.nejckorasa.result.CmpResult;
+import io.github.nejckorasa.result.Diff;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -7,10 +11,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
-
-import io.github.nejckorasa.result.CmpPair;
-import io.github.nejckorasa.result.CmpResult;
-import io.github.nejckorasa.result.Diff;
 
 import static io.github.nejckorasa.CollectionPartitioner.buildPartition;
 
