@@ -56,14 +56,12 @@ static SomeClass {
     long id;
     int firstProperty;
     String secondProperty;
-    // other fields emitted...
 }
 
 static OtherClass {
     long id;
     int propertyOne;
     String propertyTwo;
-    // other fields emitted...
 }
 ```
 Compare collections of different classes by only comparing 2 of their fields and matching by `id`:
